@@ -26,6 +26,22 @@ spiegato voce per voce, e in due casi l'errore era dalla loro parte.
 
 Ricerca chiusa il 6 agosto 2026, otto voci.
 
+## Cosa è emerso
+
+Quattro risultati che il documento sotto argomenta per esteso, e che nessuno dei calcolatori pubblici confrontati espone.
+
+**Il 9,19% da solo non corrisponde a nessun dipendente reale.** Oltre alla quota IVS ogni lavoratore non dirigente paga un terzo del contributo FIS o CIGS, fra lo 0,17% e lo 0,30% secondo la dimensione aziendale. È emerso cercando il costo del lavoro a carico dell'azienda, ed è un difetto trovato nel nostro stesso calcolo. Spiega per inciso l'aliquota del 9,49% che circola senza motivazione. **Voce 4.**
+
+**Il rapporto delle detrazioni va troncato a quattro decimali**, art. 13 comma 6 TUIR. Nessuna delle fonti secondarie consultate lo riportava. Vale tre centesimi, ed è la differenza fra aver letto la norma e aver copiato una formula. **Voce 2.**
+
+**L'esenzione dall'addizionale comunale di Milano non è una franchigia.** Superati i 23.000 euro lo 0,8% si applica all'intero imponibile. Trattarla come franchigia, su una RAL di 30.000, produce 34 euro invece di 218. **Voce 6.**
+
+**L'art. 13 TUIR è abrogato dal 1° gennaio 2027** dal d.lgs. 117/2026. Il modello ha quindi una scadenza nota, ed è il motivo per cui le costanti stanno in un file versionato per anno d'imposta. **Voce 2.**
+
+Ci sono poi due risultati in negativo, che valgono quanto quelli in positivo. Una rettifica alla circolare INPS 6/2026, segnalata da una fonte secondaria, non esiste: verificata la pagina ufficiale, nessun avviso. E le due soglie contributive del progetto open source `stipendio.top` sono ferme all'anno precedente, perché non ha recepito l'aggiornamento ISTAT di gennaio 2026.
+
+## Cosa è verificato, e fin dove
+
 | Verifica | Esito |
 |---|---|
 | Detrazioni art. 13 e maggiorazione 65 euro | Normattiva, testo vigente 2026. La maggiorazione **spetta**, fascia 25.000-35.000 |
@@ -39,122 +55,40 @@ Ricerca chiusa il 6 agosto 2026, otto voci.
 
 **Da tenere presente per il futuro del prodotto**: l'art. 13 TUIR è abrogato dal 1° gennaio 2027 dal d.lgs. 117/2026.
 
-**Quello che resta aperto**
+**Dove si ferma la verifica**
 
-I dubbi sollevati durante la ricerca e poi chiusi sono documentati nelle voci qui sotto, sotto le intestazioni `RISOLTO`. Restano aperti solo questi.
+Ogni dubbio sollevato durante la ricerca è stato chiuso, e le chiusure stanno nelle voci qui sotto sotto le intestazioni `RISOLTO`. Quattro punti restano ai margini del caso coperto, e sono dichiarati perché il confine di un modello è parte del modello.
 
-- L'agevolazione IRPEF del secondo scaglione è "sterilizzata" sopra i 200.000 euro di reddito. Fuori dal caso standard del task, ma è un limite dichiarato del prototipo.
-- La pagina dell'Agenzia delle Entrate ha ancora la tabella impostata sull'anno d'imposta precedente e riporta la modifica 2026 come nota testuale. Vale come fonte primaria, ma il riferimento normativo diretto è la Legge 199/2025.
-- Sulle detrazioni da lavoro dipendente la fonte è il testo dell'art. 13 TUIR vigente 2026 su Normattiva, che è primaria e sufficiente. Manca però una circolare dell'Agenzia sulla Legge di Bilancio 2026: quella disponibile è la 4/E del 2025.
-- Il trattamento integrativo nella fascia 15.000-28.000: il caso di test ci ricade dentro per reddito, e il controllo di capienza lo esclude. La verifica è nel codice, non assunta, ma la fascia meriterebbe un riscontro in più.
-
----
-
-## Riscontri dal campo (r/ItaliaPersonalFinance)
-
-Materiale non citabile come fonte, ma prezioso per capire dove il modello va spiegato e quali errori circolano. Due thread letti il 6 agosto 2026: "RAL vs netto: è normale che prenda così poco?" e "Come si calcola lo stipendio netto dal RAL?".
-
-### L'errore che circola sulla catena
-
-Un utente descrive il suo metodo così: calcola l'IRPEF netta, la sottrae dall'imponibile ottenendo un "nuovo imponibile", e **su quello** calcola le addizionali. È esattamente l'errore contro cui mette in guardia la voce 8: le addizionali si calcolano sul reddito complessivo al netto degli oneri deducibili, non sul reddito già decurtato dell'IRPEF. Il metodo sbagliato produce addizionali più basse di circa il 12%.
-
-È citato nel README fra i punti dove è facile sbagliare, perché la regola da sola non basta: serve conoscere anche la sua versione sbagliata più diffusa.
-
-### Le addizionali non si vedono il primo anno
-
-Ricorre in entrambi i thread, con toni da presa in giro verso chi ha appena iniziato a lavorare: le addizionali dell'anno si versano in acconto e saldo l'anno successivo, quindi il primo anno di lavoro la busta è più ricca e dall'anno dopo cala. Conferma sul campo la semplificazione già segnata nella voce 8, e ne fa qualcosa da spiegare in pagina e non solo nel README, perché è il primo motivo per cui il nostro numero non coinciderà con il cedolino di chi prova il calcolatore.
-
-### Aliquota INPS: 9,19% non è sempre
-
-Segnalato che l'aliquota a carico del dipendente può essere **9,49% invece di 9,19%** a seconda dell'azienda, e chi riceve la busta non ha modo semplice di sapere perché. Il riscontro combacia con l'implementazione open source, che ha proprio `baseWorker: 0.0919` e `conCigs: 0.0949`: la differenza è il contributo CIGS, dovuto dalle aziende sopra certe soglie dimensionali o di settore.
-
-Segnalazione raccolta qui e chiusa sulla fonte primaria nella voce 4: la differenza è la quota FIS o CIGS a carico del lavoratore, e il prototipo la calcola.
-
-### L'1% aggiuntivo si valuta mese per mese
-
-Un utente descrive, in tono sarcastico ma corretto, che l'aliquota aggiuntiva scatta se **la retribuzione del mese** supera una certa soglia, non in base al totale annuo. Ecco perché la circolare INPS pubblica sia il valore annuo (56.224) sia quello mensilizzato (4.685).
-
-Il nostro modello lo applica su base annua. Su una RAL costante il risultato coincide, ma con mensilità disomogenee, come il mese della quattordicesima, no. Semplificazione da dichiarare.
-
-### Calcolatori citati dalla community
-
-Emergono `calcolastipendionetto.it`, giudicato preciso all'euro da chi lo ha confrontato con la propria busta, e il simulatore di `PMI.it`, che un utente preferisce ma un altro critica perché non consente di modificare l'addizionale comunale. Utili come terzo e quarto riscontro, con la stessa cautela: sono secondari.
-
-**Attenzione alle aliquote nei thread più vecchi**: il thread metodologico è del 2023 e cita quattro scaglioni con il 25% e il 38%. Sono superati. Serve per il metodo, non per i numeri.
+- **Redditi sopra i 200.000 euro**: l'agevolazione IRPEF del secondo scaglione viene sterilizzata. Fuori dal caso standard del task, quindi non implementata e dichiarata come limite.
+- **Detrazioni da lavoro dipendente**: la fonte è il testo dell'art. 13 TUIR vigente 2026 su Normattiva, cioè la norma stessa. Una circolare dell'Agenzia sulla Legge di Bilancio 2026 non è ancora uscita, l'ultima è la 4/E del 2025, ma un commento non aggiungerebbe nulla al testo vigente.
+- **Scaglioni IRPEF**: la pagina dell'Agenzia delle Entrate ha ancora la tabella impostata sull'anno precedente e riporta la modifica 2026 come nota testuale. Vale come fonte primaria, e il riferimento normativo diretto è la Legge 199/2025, citata in voce 1.
+- **Trattamento integrativo, fascia 15.000-28.000**: il caso di test ci ricade dentro per reddito. Il prototipo non assume che non spetti, calcola la capienza e la lascia decidere al codice. Il testo del d.l. 3/2020 su quella fascia non è stato riscontrato a parte.
 
 ---
 
 ## Controllo incrociato: caso di riferimento RAL 30.000
 
-> **Nota di allineamento.** I numeri di questa sezione fotografano il modello
-> com'era al termine della ricerca fiscale, quando i contributi a carico del
-> dipendente erano la sola quota IVS. La voce 4 ha poi stabilito che a quella
-> quota si somma un terzo del contributo FIS o CIGS secondo la dimensione
-> aziendale, e il prototipo ora la calcola. Il risultato di riferimento
-> aggiornato è quindi **23.373,05** per un'azienda da 6 a 15 dipendenti, non i
-> 23.425,48 riportati qui sotto.
->
-> La sezione resta com'è di proposito: serve a mostrare il percorso, e lo
-> scarto fra i due numeri è esattamente ciò che quella voce ha trovato. La
-> verifica finale, a parità di ipotesi con il calcolatore pubblico, è nel
-> README.
+> **Nota di allineamento.** Questa sezione fotografa il modello al termine
+> della ricerca fiscale, quando i contributi a carico del dipendente erano la
+> sola quota IVS. La voce 4 ha poi trovato la quota FIS o CIGS, e il risultato
+> di riferimento è salito a **23.373,05** dai 23.425,48 di allora. La verifica
+> finale, riconciliata al centesimo, è nel README.
 
-Impiegato a tempo indeterminato, residente a Milano, nessun familiare a carico, nessuna agevolazione, anno 2026.
+Impiegato a tempo indeterminato, residente a Milano, nessun familiare a carico, nessuna agevolazione, anno 2026. Netto annuo a quello stadio **23.425,48**, prelievo del 21,9%.
 
-| Voce | Importo |
-|---|---|
-| RAL | 30.000,00 |
-| Contributi INPS a carico dipendente (9,19%) | −2.757,00 |
-| **Imponibile fiscale** | **27.243,00** |
-| IRPEF lorda (23% entro il primo scaglione) | 6.265,89 |
-| Detrazione da lavoro dipendente (art. 13, commi 1 e 1.1) | −2.044,26 |
-| Ulteriore detrazione (fascia 20.000-32.000) | −1.000,00 |
-| **IRPEF netta** | **3.221,63** |
-| Addizionale regionale Lombardia (per scaglioni) | −377,94 |
-| Addizionale comunale Milano (0,8% su tutto l'imponibile) | −217,94 |
-| **NETTO ANNUO** | **23.425,48** |
-| Netto mensile su 12 | 1.952,12 |
-| Netto mensile su 13 | 1.801,96 |
-| Netto mensile su 14 | 1.673,25 |
+### Il confronto che conta
 
-Prelievo totale sulla RAL: 6.574,52 euro, pari al 21,9%.
+`stipendionettocalcolatore.it` è l'unico calcolatore pubblico trovato che espone tutti i passaggi, quindi l'unico con cui si possa fare un confronto voce per voce invece che sul totale.
 
-La detrazione da lavoro dipendente include i 65 euro del comma 1.1 e il troncamento del rapporto a quattro decimali imposto dal comma 6: 1.910 + 1.190 × 0,0582 = 1.979,26, più 65.
+**Prima** di leggere l'art. 13 su Normattiva il nostro calcolo coincideva con il loro all'euro: 23.360,52 più le due addizionali faceva 23.956,40 contro i loro 23.956. Ogni passaggio combaciava.
 
-Trattamento integrativo: non spetta. Le detrazioni complessive (2.979,26, cioè il comma 1 troncato più l'ulteriore detrazione) restano ampiamente sotto l'imposta lorda (6.265,89), quindi la condizione di capienza non è soddisfatta.
+**Dopo**, il testo della norma ha mostrato che entrambi omettevamo la maggiorazione di 65 euro del comma 1.1. Il nostro netto è quindi più alto di 65 euro del loro, più 3 centesimi dovuti al troncamento del comma 6 che loro non applicano.
 
-### Confronto con calcolatori pubblici
+La riconciliazione non è più perfetta, ed è una buona notizia: significa che siamo passati dal replicare un calcolatore al leggere la fonte. Uno scarto spiegato riga per riga vale più di una coincidenza.
 
-**Calcolatore 1** (stipendionettocalcolatore.it, pagina dedicata a RAL 30.000 nel 2026):
+Secondo riscontro, `dalordoanetto.com`: concorda sui contributi ma dichiara un'IRPEF di circa 5.000 euro contro i nostri 3.287, uno scarto compatibile con il non applicare l'ulteriore detrazione da 1.000 euro. Le sue cifre sono però internamente incoerenti, il netto mensile dichiarato non torna con le trattenute dichiarate, quindi vale come riscontro debole.
 
-| Voce | Loro | Nostro | Scarto |
-|---|---|---|---|
-| Contributi INPS | 2.757 | 2.757,00 | 0 |
-| Imponibile | 27.243 | 27.243,00 | 0 |
-| IRPEF lorda | 6.266 | 6.265,89 | arrotondamento |
-| Detrazione lavoro dipendente | 1.979 | 2.044,26 | **65,26** |
-| Ulteriore detrazione | 1.000 | 1.000,00 | 0 |
-| IRPEF netta | 3.287 | 3.221,63 | **65,37** |
-| Netto annuo | 23.956 (**esclude** le addizionali) | 23.425,48 (**include** le addizionali) | 65 più le addizionali |
-
-**Come si legge lo scarto.** Prima di leggere la norma su Normattiva il nostro calcolo coincideva con il loro all'euro: 23.360,52 più le due addizionali faceva esattamente 23.956,40 contro i loro 23.956. Ogni passaggio combaciava.
-
-Poi il testo dell'art. 13 ha mostrato che entrambi omettevamo la maggiorazione di 65 euro del comma 1.1. Ora il nostro netto è **più alto di 65 euro** del loro, e la differenza è interamente spiegata: 65 euro di maggiorazione, più 3 centesimi dovuti al troncamento a quattro decimali del comma 6 che loro non applicano.
-
-Quindi la riconciliazione non è più perfetta, ed è una buona notizia: significa che siamo passati dal replicare un calcolatore al leggere la fonte. Uno scarto spiegato riga per riga vale più di una coincidenza.
-
-**Calcolatore 2** (dalordoanetto.com): concorda sui contributi (2.757) e colloca il netto in Lombardia intorno ai 1.860 euro al mese, ma dichiara un'IRPEF di circa 5.000 euro e addizionali per circa 553 euro.
-
-Scarti e loro spiegazione:
-- **IRPEF circa 5.000 contro i nostri 3.287**: la differenza vale quasi esattamente l'ulteriore detrazione da 1.000 euro più una detrazione da lavoro dipendente calcolata diversamente. La lettura più probabile è che non applichino la misura della fascia 20.000-32.000. È lo stesso errore che avremmo fatto noi ignorando la voce 3.
-- **Addizionali 553 contro le nostre 596**: circa 43 euro di scarto, compatibile con un'addizionale comunale calcolata su una base diversa o con un'aliquota regionale applicata in modo non progressivo.
-- Le sue cifre sono internamente incoerenti (il netto mensile dichiarato non torna con il totale delle trattenute dichiarate), quindi lo consideriamo un riscontro debole.
-
-### Conclusione
-
-La catena regge. Il riscontro forte è il calcolatore 1, che espone tutti i passaggi e coincide voce per voce. Il calcolatore 2 diverge dove è meno trasparente, e la divergenza si spiega con l'omissione dell'ulteriore detrazione.
-
-Nota sull'aliquota del 9,19%: entrambi i calcolatori la usano, il che è un riscontro utile ma resta materiale secondario. La chiusura su fonte primaria è nella voce 4, dove emerge anche che il 9,19% secco non copre nessun caso reale.
+Entrambi usano il 9,19%, il che conferma l'aliquota ma resta materiale secondario: la chiusura su fonte primaria è nella voce 4, dove emerge anche che il 9,19% secco non copre nessun caso reale.
 
 Confronti eseguiti il 6 agosto 2026.
 
@@ -487,3 +421,37 @@ Scelta adottata dal prototipo: tre tab per 12, 13 e 14 quote, con il netto annuo
 ### La semplificazione che ne discende
 
 Nella busta paga reale le addizionali dell'anno non si trattengono nello stesso anno: si versano in acconto e saldo l'anno successivo, in rate mensili. Il prototipo le calcola per competenza sull'anno, che è la scelta giusta per una proiezione annuale, ed è dichiarata nel README perché è la prima differenza che salta all'occhio a chi confronta con un cedolino vero.
+
+---
+
+## Appendice: riscontri dal campo (r/ItaliaPersonalFinance)
+
+Materiale non citabile come fonte, ma prezioso per capire dove il modello va spiegato e quali errori circolano. Due thread letti il 6 agosto 2026: "RAL vs netto: è normale che prenda così poco?" e "Come si calcola lo stipendio netto dal RAL?".
+
+### L'errore che circola sulla catena
+
+Un utente descrive il suo metodo così: calcola l'IRPEF netta, la sottrae dall'imponibile ottenendo un "nuovo imponibile", e **su quello** calcola le addizionali. È esattamente l'errore contro cui mette in guardia la voce 8: le addizionali si calcolano sul reddito complessivo al netto degli oneri deducibili, non sul reddito già decurtato dell'IRPEF. Il metodo sbagliato produce addizionali più basse di circa il 12%.
+
+È citato nel README fra i punti dove è facile sbagliare, perché la regola da sola non basta: serve conoscere anche la sua versione sbagliata più diffusa.
+
+### Le addizionali non si vedono il primo anno
+
+Ricorre in entrambi i thread, con toni da presa in giro verso chi ha appena iniziato a lavorare: le addizionali dell'anno si versano in acconto e saldo l'anno successivo, quindi il primo anno di lavoro la busta è più ricca e dall'anno dopo cala. Conferma sul campo la semplificazione già segnata nella voce 8, e ne fa qualcosa da spiegare in pagina e non solo nel README, perché è il primo motivo per cui il nostro numero non coinciderà con il cedolino di chi prova il calcolatore.
+
+### Aliquota INPS: 9,19% non è sempre
+
+Segnalato che l'aliquota a carico del dipendente può essere **9,49% invece di 9,19%** a seconda dell'azienda, e chi riceve la busta non ha modo semplice di sapere perché. Il riscontro combacia con l'implementazione open source, che ha proprio `baseWorker: 0.0919` e `conCigs: 0.0949`: la differenza è il contributo CIGS, dovuto dalle aziende sopra certe soglie dimensionali o di settore.
+
+Segnalazione raccolta qui e chiusa sulla fonte primaria nella voce 4: la differenza è la quota FIS o CIGS a carico del lavoratore, e il prototipo la calcola.
+
+### L'1% aggiuntivo si valuta mese per mese
+
+Un utente descrive, in tono sarcastico ma corretto, che l'aliquota aggiuntiva scatta se **la retribuzione del mese** supera una certa soglia, non in base al totale annuo. Ecco perché la circolare INPS pubblica sia il valore annuo (56.224) sia quello mensilizzato (4.685).
+
+Il nostro modello lo applica su base annua. Su una RAL costante il risultato coincide, ma con mensilità disomogenee, come il mese della quattordicesima, no. Semplificazione da dichiarare.
+
+### Calcolatori citati dalla community
+
+Emergono `calcolastipendionetto.it`, giudicato preciso all'euro da chi lo ha confrontato con la propria busta, e il simulatore di `PMI.it`, che un utente preferisce ma un altro critica perché non consente di modificare l'addizionale comunale. Utili come terzo e quarto riscontro, con la stessa cautela: sono secondari.
+
+**Attenzione alle aliquote nei thread più vecchi**: il thread metodologico è del 2023 e cita quattro scaglioni con il 25% e il 38%. Sono superati. Serve per il metodo, non per i numeri.
