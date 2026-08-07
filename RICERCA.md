@@ -24,7 +24,7 @@ Il modello è stato infine riscontrato contro tre implementazioni indipendenti,
 due calcolatori pubblici e un progetto open source. Dove diverge, lo scarto è
 spiegato voce per voce, e in due casi l'errore era dalla loro parte.
 
-Ricerca chiusa il 6 agosto 2026, otto voci.
+Ricerca chiusa il 6 agosto 2026 su otto voci, più una nona aperta e chiusa il 7 agosto per decidere se i carichi di famiglia andassero implementati.
 
 ## Cosa è emerso
 
@@ -421,6 +421,31 @@ Scelta adottata dal prototipo: tre tab per 12, 13 e 14 quote, con il netto annuo
 ### La semplificazione che ne discende
 
 Nella busta paga reale le addizionali dell'anno non si trattengono nello stesso anno: si versano in acconto e saldo l'anno successivo, in rate mensili. Il prototipo le calcola per competenza sull'anno, che è la scelta giusta per una proiezione annuale, ed è dichiarata nel README perché è la prima differenza che salta all'occhio a chi confronta con un cedolino vero.
+
+## 9. Carichi di famiglia: valutati e non implementati - VERIFICATO
+
+Voce aperta dopo la chiusura delle altre otto, per decidere se aggiungere due selettori "coniuge a carico" e "figli a carico". La risposta è no, e il testo dell'art. 12 TUIR dice perché.
+
+**Figli sotto i 21 anni: la detrazione non esiste più.** Nel testo vigente la lettera c) del comma 1 riconosce
+
+> 950 euro per ciascun figlio [...] di **età pari o superiore a 21 anni ma inferiore a 30 anni**, nonché per ciascun figlio di età pari o superiore a 30 anni con disabilità accertata
+
+e segnala tre periodi soppressi dal **d.lgs. 21 dicembre 2021, n. 230**, il cui titolo è "Istituzione dell'assegno unico e universale per i figli a carico", con decorrenza del beneficio dal 1° marzo 2022. La detrazione per i figli minori non è stata ridotta, è stata sostituita da una prestazione erogata dall'INPS che sta fuori dalla busta paga.
+
+Un selettore "figli a carico" mostrerebbe quindi uno sconto fiscale dove la norma non lo prevede, e proprio nel caso più frequente. Su un prodotto di cost saving è l'errore nella direzione peggiore, per eccesso.
+
+**Essere a carico è una condizione di reddito, non una scelta.** Comma 2, verbatim:
+
+> Le detrazioni di cui al comma 1 spettano a condizione che le persone alle quali si riferiscono possiedano un reddito complessivo [...] non superiore a **2.840,51 euro**, al lordo degli oneri deducibili. Per i figli di età non superiore a ventiquattro anni il limite di reddito complessivo di cui al primo periodo è elevato a **4.000 euro**.
+
+Vale anche per il coniuge, la cui detrazione della lettera a) parte da 800 euro e si riduce per fasce di reddito. Un interruttore booleano non può esprimere quella condizione: la incorporerebbe come assunzione invisibile su quanto guadagna il familiare. È l'opposto del selettore sulla dimensione aziendale, che l'assunzione la mette davanti a chi usa la pagina.
+
+Conclusione: la semplificazione resta, ma da qui in poi è argomentata invece che solo dichiarata.
+
+- Fonte primaria: Normattiva, d.P.R. 917/1986 art. 12, testo vigente dal 20 dicembre 2025 al 31 dicembre 2026 - https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1986-12-22;917~art12
+- Fonte primaria: Normattiva, d.lgs. 21 dicembre 2021 n. 230, titolo e decorrenza - https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-12-21;230
+- Riscontro indipendente: Agenzia delle Entrate, scheda sui familiari a carico, che conferma la sostituzione con l'assegno unico dal 1° marzo 2022 - https://infoprecompilata.agenziaentrate.gov.it/portale/web/guest/familiari-a-carico2
+- Data di consultazione: 7 agosto 2026
 
 ---
 

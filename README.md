@@ -178,6 +178,28 @@ stessa RAL di 30.000 il netto passa da 23.373,05 a **23.967,03**.
 calare l'anno dopo a parità di lordo. Nessuno dei calcolatori confrontati lo
 mostra.
 
+## I carichi di famiglia: perché non c'è un selettore
+
+È la prima estensione che viene in mente, e l'art. 12 TUIR nel testo vigente
+per il 2026 spiega perché un selettore sarebbe peggio della sua assenza.
+
+Per i figli sotto i 21 anni la detrazione non esiste più: i periodi che la
+prevedevano sono stati soppressi dal d.lgs. 230/2021, quello che istituisce
+l'assegno unico e universale, con decorrenza dal 1° marzo 2022. Restano 950
+euro per i figli fra i 21 e i 30 anni, e oltre i 30 solo con disabilità
+accertata. Una casella "figli a carico" mostrerebbe quindi uno sconto dove la
+norma non lo prevede, nel caso più comune di tutti.
+
+C'è poi una ragione che vale anche per il coniuge: essere a carico non è una
+scelta dell'utente ma una condizione di reddito, non più di 2.840,51 euro
+l'anno, elevati a 4.000 per i figli sotto i 24. Un interruttore acceso o spento
+non esprime quella condizione, la nasconde. Il selettore della dimensione
+aziendale fa il contrario, e la differenza è il motivo per cui uno c'è e
+l'altro no.
+
+Fonte: art. 12 TUIR, testo vigente dal 20 dicembre 2025 al 31 dicembre 2026,
+letto su Normattiva il 7 agosto 2026.
+
 ## Semplificazioni dichiarate
 
 - **Addizionali per competenza.** Attribuite all'anno di maturazione. In busta
@@ -195,8 +217,9 @@ mostra.
   disomogenee il risultato può differire.
 - **Nessun altro reddito e nessun onere deducibile**, quindi imponibile fiscale
   e reddito complessivo coincidono.
-- Nessun carico familiare, premio di risultato, straordinario, fringe benefit o
-  previdenza complementare.
+- **Nessun carico familiare**, per le ragioni della sezione qui sopra.
+- Nessun premio di risultato, straordinario, fringe benefit o previdenza
+  complementare.
 - Nessun arrotondamento fiscale all'unità di euro sulle imposte.
 - Un solo comune e una sola regione. La struttura del file delle aliquote è
   però già pronta per ospitarne altri: il MEF pubblica le tabelle complete.
@@ -226,6 +249,14 @@ Prelievo effettivo 22,1%. Netto mensile 1.947,75 su 12 quote, 1.797,93 su 13,
 Riprodotto in modo indipendente da `verifica-caso-30000.py`, che parte dagli
 stessi valori grezzi e arriva allo stesso centesimo.
 
+**Perché il riscontro è in Python e non in JavaScript.** Un test scritto nella
+stessa lingua importerebbe `calculator.js`, e verificherebbe che il codice è
+uguale a se stesso. Riscrivere la catena in un'altra lingua, partendo dalle
+aliquote grezze invece che dal codice, costringe a riderivare il modello: un
+errore di modellazione emerge come scarto fra i due risultati, invece di
+essere riprodotto due volte. Python inoltre non aggiunge nulla da installare,
+serve già a mettere in piedi la pagina.
+
 **Confronto con un calcolatore pubblico, a parità di ipotesi.** Un calcolatore
 online che espone tutti i passaggi produce 23.956 euro per lo stesso caso,
 dichiarando di escludere le addizionali. Non applica però né la quota FIS né la
@@ -242,8 +273,6 @@ calcolatore omette.
 
 Lo scarto è quindi spiegato al centesimo, ed è il motivo per cui il modello è
 stato costruito sulle fonti invece che replicando un calcolatore esistente.
-
-Il calcolo è riprodotto in modo indipendente in `verifica-caso-30000.py`.
 
 ## Scadenza nota
 
