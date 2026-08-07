@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": [
+      "ES2023",
+      "DOM"
+    ],
+    "checkJs": true,
+    "noEmit": true,
+    "strict": true,
+    "noImplicitAny": true
+  },
+  "include": [
+    "src/rates-2026.js",
+    "src/calculator.js",
+    "types/globals.d.ts"
+  ]
+}

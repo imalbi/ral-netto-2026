@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Da RAL a netto - anno d'imposta 2026</title>
+<style>
+  :root {
+    --ink: #14181d;
+    --muted: #5d6873;
+    --line: #e2e6ea;
+    --bg: #f7f8f9;
+    --card: #ffffff;
+    --accent: #1f4e79;
+    --minus: #a4243b;
+    --plus: #1d6f42;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.5;
+    font-size: 16px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 32px 20px 64px; }
+
+  header { margin-bottom: 28px; }
+  h1 { font-size: 1.6rem; letter-spacing: -0.01em; }
+  .year {
+    display: inline-block; margin-left: 8px; padding: 2px 8px;
+    background: var(--accent); color: #fff; border-radius: 4px;
+    font-size: 0.75rem; font-weight: 600; vertical-align: 3px;
+  }
+  .lede { color: var(--muted); margin-top: 6px; }
+  .chips { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-size: 0.78rem; color: var(--muted);
+    border: 1px solid var(--line); background: var(--card);
+    border-radius: 999px; padding: 3px 10px;
+  }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 20px; margin-bottom: 20px;
+  }
+
+  form { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+  .field { flex: 1 1 220px; }
+  label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; }
+  .hint { font-weight: 400; color: var(--muted); }
+  input[type="number"], select {
+    width: 100%; padding: 11px 12px; font-size: 1.05rem;
+    border: 1px solid #c8ced4; border-radius: 7px; background: #fff;
+    font-variant-numeric: tabular-nums;
+  }
+  input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button {
+    padding: 12px 22px; font-size: 1rem; font-weight: 600;
+    background: var(--accent); color: #fff; border: 0; border-radius: 7px;
+    cursor: pointer;
+  }
+  button:hover { background: #17395a; }
+
+  .options {
+    display: flex; gap: 28px; flex-wrap: wrap;
+    margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line);
+  }
+  .opt-group { flex: 1 1 260px; }
+  .opt-label {
+    display: block; font-size: 0.78rem; font-weight: 700; margin-bottom: 7px;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+  }
+  .options .tabs { justify-content: flex-start; }
+  .options .tabs span { padding: 6px 13px; font-size: 0.84rem; }
+  .opt-hint { font-size: 0.79rem; color: var(--muted); margin-top: 7px; }
+
+  #results[hidden] { display: none; }
+
+  .headline { text-align: center; padding: 6px 0 18px; }
+  .headline .label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .headline .value { font-size: 2.4rem; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+
+  /* Segmented controls are radio groups: native inputs give keyboard
+     navigation and the right semantics without any script. */
+  .tabs { display: flex; gap: 6px; justify-content: center; margin-bottom: 4px; }
+  .tabs label { position: relative; }
+  .tabs input { position: absolute; inset: 0; opacity: 0; margin: 0; }
+  .tabs span {
+    display: block; cursor: pointer;
+    color: var(--muted); border: 1px solid var(--line); border-radius: 7px;
+    padding: 7px 16px; font-size: 0.88rem; font-weight: 600;
+  }
+  .tabs input:checked + span { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tabs input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .monthly { text-align: center; padding: 14px 0 4px; }
+  .monthly .value { font-size: 1.9rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .monthly .note { font-size: 0.84rem; color: var(--muted); margin-top: 6px; }
+
+  h2 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); margin-bottom: 12px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 9px 0; vertical-align: top; border-bottom: 1px solid var(--line); }
+  tr:last-child td { border-bottom: 0; }
+  td.amount { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 14px; }
+  .row-label { font-weight: 500; }
+  .row-detail { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+  .row-detail a { color: var(--muted); }
+  tr.emphasis td { background: #f2f5f8; font-weight: 700; }
+  tr.emphasis td:first-child { padding-left: 8px; }
+  tr.emphasis td.amount { padding-right: 8px; }
+  tr.total td { font-size: 1.1rem; }
+  .minus { color: var(--minus); }
+  .plus { color: var(--plus); }
+
+  .summary { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; font-size: 0.9rem; color: var(--muted); }
+  .summary b { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  details { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 6px; }
+  details + details { margin-top: 10px; }
+  summary { cursor: pointer; font-weight: 600; font-size: 0.92rem; }
+  details ul { margin: 10px 0 4px 18px; }
+  details li { margin-bottom: 7px; font-size: 0.9rem; color: var(--muted); }
+  details li b { color: var(--ink); }
+
+  .source { padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 0.87rem; }
+  .source:last-child { border-bottom: 0; }
+  .source .name { font-weight: 600; }
+  .source .meta { color: var(--muted); margin-top: 2px; }
+  .source a { color: var(--accent); word-break: break-all; }
+  .kind {
+    display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em;
+    text-transform: uppercase; padding: 1px 7px; border-radius: 3px; vertical-align: 1px;
+    margin-left: 6px;
+  }
+  .kind-annual { background: #e7f0f7; color: var(--accent); }
+  .kind-structural { background: #eee9f4; color: #5b3d7a; }
+
+  footer { color: var(--muted); font-size: 0.82rem; text-align: center; margin-top: 28px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Da RAL a netto<span class="year">2026</span></h1>
+    <p class="lede">
+      Proiezione della retribuzione netta annuale a partire dalla retribuzione
+      annua lorda, con tutte le voci trattenute in chiaro.
+    </p>
+    <div class="chips">
+      <span class="chip">Impiegato a tempo indeterminato</span>
+      <span class="chip">Residente a Milano</span>
+      <span class="chip">Nessuna agevolazione</span>
+      <span class="chip">Nessun familiare a carico</span>
+    </div>
+  </header>
+
+  <div class="card">
+    <form id="form">
+      <div class="field">
+        <label for="ral">RAL <span class="hint">retribuzione annua lorda, in euro</span></label>
+        <input type="number" id="ral" name="ral" min="0" step="100" value="30000" required>
+      </div>
+      <button type="submit">Calcola</button>
+    </form>
+
+    <div class="options">
+      <div class="opt-group">
+        <span class="opt-label">Dimensione dell'azienda</span>
+        <div class="tabs" role="radiogroup" aria-label="Dimensione dell'azienda">
+          <label><input type="radio" name="size" value="upTo5"><span>Fino a 5</span></label>
+          <label><input type="radio" name="size" value="over5" checked><span>Da 6 a 15</span></label>
+          <label><input type="radio" name="size" value="over15"><span>Oltre 15</span></label>
+        </div>
+        <p class="opt-hint">Determina la quota FIS o CIGS a carico del dipendente, fra 0,17% e 0,30%.</p>
+      </div>
+      <div class="opt-group">
+        <span class="opt-label">Anno di rapporto</span>
+        <div class="tabs" role="radiogroup" aria-label="Anno di rapporto">
+          <label><input type="radio" name="firstYear" value="false" checked><span>A regime</span></label>
+          <label><input type="radio" name="firstYear" value="true"><span>Primo anno</span></label>
+        </div>
+        <p class="opt-hint">Nel primo anno le addizionali non sono ancora trattenute: si versano dall'anno successivo.</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="results" hidden>
+
+    <div class="card">
+      <div class="headline">
+        <div class="label">Netto annuo</div>
+        <div class="value" id="netAnnual">-</div>
+      </div>
+
+      <div class="tabs" role="radiogroup" aria-label="Mensilità">
+        <label><input type="radio" name="months" value="12"><span>12 mensilità</span></label>
+        <label><input type="radio" name="months" value="13"><span>13 mensilità</span></label>
+        <label><input type="radio" name="months" value="14" checked><span>14 mensilità</span></label>
+      </div>
+      <div class="monthly">
+        <div class="value" id="netMonthly">-</div>
+        <p class="note">
+          Il netto annuo non cambia: la RAL comprende già tredicesima e
+          quattordicesima. Le mensilità cambiano solo in quante quote viene diviso.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Dal lordo al netto, voce per voce</h2>
+      <table>
+        <tbody id="breakdown"></tbody>
+      </table>
+      <div class="summary">
+        <span>Imposte <b id="taxes">-</b></span>
+        <span>Contributi <b id="contributions">-</b></span>
+        <span>Totale trattenute <b id="withheld">-</b></span>
+        <span>Prelievo effettivo <b id="rate">-</b></span>
+      </div>
+      <p class="row-detail" style="margin-top:10px">
+        Imposte e contributi sono tenuti distinti: le prime finanziano la
+        fiscalità generale e quella locale, i secondi la pensione e le tutele
+        del lavoratore. Sommarli in un unico numero è comodo ma confonde due
+        cose diverse.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Cosa questo calcolo non fa</h2>
+
+      <details open>
+        <summary>Semplificazioni dichiarate</summary>
+        <ul>
+          <li><b>Addizionali per competenza.</b> Sono attribuite all'anno in cui maturano. In busta paga vengono invece trattenute l'anno successivo, in acconto da marzo e a saldo dopo il conguaglio: il primo anno di lavoro non compaiono affatto.</li>
+          <li><b>Sopra i 15 dipendenti FIS e CIGS possono coesistere.</b> Il calcolo applica la sola quota CIGS, che è la più alta delle due. Sotto quella soglia la quota FIS è quella corretta e completa.</li>
+          <li><b>La quota a carico del dipendente non è il solo 9,19%.</b> A quell'aliquota IVS si somma un terzo del contributo FIS, o lo 0,30% della CIGS: è il motivo per cui in giro si legge un'aliquota del 9,49%. Il selettore qui sopra la calcola, ma la dimensione aziendale è una scelta dell'utente e il default non può indovinarla.</li>
+          <li><b>Il costo per l'azienda non è incluso.</b> Sarebbe l'estensione naturale, ma dipende dalla dimensione aziendale (FIS 0,50 o 0,80%, CIGS 0,90% oltre i 15 dipendenti) e dalla classe di rischio INAIL. Servirebbero due input in più e ogni combinazione andrebbe verificata: un costo del lavoro parziale sarebbe peggio di nessun costo del lavoro, perché sbaglierebbe per difetto.</li>
+          <li><b>1% aggiuntivo su base annua.</b> In busta paga la soglia si verifica mese per mese sul valore mensilizzato, quindi con mensilità disomogenee il risultato può differire.</li>
+          <li><b>Nessun altro reddito e nessun onere deducibile.</b> Imponibile fiscale e reddito complessivo coincidono.</li>
+          <li><b>Nessun carico familiare, nessun premio di risultato, nessuno straordinario, nessun fringe benefit, nessun fondo di previdenza complementare.</b></li>
+          <li><b>Solo tempo indeterminato</b>, come concesso dalla traccia. La detrazione minima più alta prevista per il tempo determinato è implementata nel modello ma non esposta in pagina, perché sarebbe una scelta che l'utente non deve fare.</li>
+          <li><b>Nessun arrotondamento fiscale all'unità di euro</b> sulle imposte, che la normativa prevede in dichiarazione.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Errori evitati, perché sono i più diffusi</summary>
+        <ul>
+          <li><b>Le addizionali non si calcolano sul reddito già decurtato dell'IRPEF.</b> La base è il reddito complessivo al netto degli oneri deducibili. La condizione di debenza, invece, è che risulti IRPEF dovuta dopo le detrazioni: sono due cose diverse e vanno valutate in quest'ordine.</li>
+          <li><b>L'esenzione comunale di Milano non è una franchigia.</b> Superati i 23.000 euro l'aliquota si applica all'intero imponibile, non alla sola eccedenza.</li>
+          <li><b>L'addizionale regionale lombarda è progressiva per scaglioni</b>, non ad aliquota unica di fascia.</li>
+          <li><b>La maggiorazione di 65 euro del comma 1.1 spetta</b> tra 25.000 e 35.000 euro di reddito complessivo. Diversi calcolatori pubblici la omettono.</li>
+          <li><b>Il rapporto nella formula delle detrazioni va troncato a quattro decimali</b>, come impone il comma 6.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Scadenza nota di questo calcolo</summary>
+        <ul>
+          <li>L'articolo 13 del TUIR, che regge tutta la parte delle detrazioni, è <b>abrogato dal 1° gennaio 2027</b> dal d.lgs. 19 giugno 2026, n. 117. Le costanti sono raccolte in un unico file versionato per anno d'imposta proprio per questo.</li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Fonti</h2>
+      <p class="row-detail" style="margin-bottom:10px">
+        Generate dal file delle costanti: la pagina e il codice non possono
+        divergere. <b>Annuale</b> significa che il valore va ripreso da una
+        fonte dell'anno d'imposta; <b>strutturale</b> che è fissato da norma e
+        la prova di vigenza è che nessuna legge lo abbia modificato.
+      </p>
+      <div id="sources"></div>
+    </div>
+
+  </section>
+
+  <footer>
+    Prototipo a scopo dimostrativo, non è una consulenza fiscale.
+    Ultima verifica delle fonti: 6 agosto 2026.
+  </footer>
+
+</div>
+
+<script src="src/rates-2026.js"></script>
+<script src="src/calculator.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>
