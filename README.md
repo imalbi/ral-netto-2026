@@ -305,7 +305,7 @@ Milano, Confcommercio (CCNL Terziario).
 Elenco completo con URL, data di consultazione e riferimento normativo nella
 sezione "Fonti" della pagina e in `RICERCA.md`.
 
-Ultima verifica delle fonti: 6 agosto 2026.
+Ultima verifica delle costanti di calcolo: 6 agosto 2026.
 
 ---
 
