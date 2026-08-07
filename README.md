@@ -6,6 +6,8 @@ mensile mostrando in chiaro ogni voce trattenuta.
 Caso coperto: **impiegato a tempo indeterminato, residente a Milano, nessuna
 agevolazione, nessun familiare a carico**.
 
+**Demo:** https://imalbi.github.io/ral-netto-2026/
+
 ## Come si apre
 
 Nessuna build, nessuna dipendenza. HTML e JavaScript semplice.
