@@ -1,26 +1,43 @@
 # Ricerca fonti - calcolatore RAL to netto
 
-## STATO
+## Come è stata condotta
 
-- Voci chiuse: 8 su 8. Nessuna voce OPEN.
-- Controllo incrociato sul caso RAL 30.000: **eseguito e riconciliato all'euro** con il calcolatore pubblico più trasparente. Dettaglio nella sezione qui sotto.
-- Ricerca conclusa il 6 agosto 2026. Da qui si può passare all'implementazione.
+Ogni valore che entra nel calcolo viene da una fonte istituzionale citabile:
+Normattiva per il testo di legge, Agenzia delle Entrate, INPS, MEF, il Comune
+per l'addizionale locale. Ogni voce porta la sua fonte, il riferimento
+normativo e la data di consultazione.
 
-**Tutte le conferme sono state chiuse il 6 agosto 2026.** Ogni valore usato nel calcolo ha ora una fonte istituzionale citabile:
+Le fonti secondarie, cioè blog fiscali, calcolatori online, un progetto open
+source e due thread di forum, non sono mai state usate come dato. Servono a
+un'altra cosa: mostrano dove il modello può sbagliare e quali errori
+circolano, e ogni loro affermazione è stata poi confermata o smentita sul
+testo primario. Due sono state smentite, ed è il motivo per cui restano
+scritte qui invece di essere cancellate.
+
+Ogni costante è etichettata **annuale** o **strutturale**. Per le annuali una
+fonte più vecchia dell'anno d'imposta è un errore. Per le strutturali la prova
+di vigenza non è la data del documento che le cita, ma il fatto che nessuna
+norma le abbia modificate. La distinzione non è teorica: nasce da un problema
+concreto incontrato sull'aliquota IVS, ed è spiegata nella voce 4.
+
+Il modello è stato infine riscontrato contro tre implementazioni indipendenti,
+due calcolatori pubblici e un progetto open source. Dove diverge, lo scarto è
+spiegato voce per voce, e in due casi l'errore era dalla loro parte.
+
+Ricerca chiusa il 6 agosto 2026, otto voci.
 
 | Verifica | Esito |
 |---|---|
 | Detrazioni art. 13 e maggiorazione 65 euro | Normattiva, testo vigente 2026. La maggiorazione **spetta**, fascia 25.000-35.000 |
 | Comma 6, troncamento a 4 decimali | Normattiva, regola trovata e applicata |
 | Aliquota IVS 9,19% | INPS, circolare 82/2022 |
-| Rettifica circolare INPS 6/2026 | **Non esiste**, la segnalazione era di terzi |
+| Rettifica alla circolare INPS 6/2026, segnalata da una fonte secondaria | **Non esiste**: verificata la pagina ufficiale, nessun avviso di rettifica |
 | Vigenza 2026 addizionale Milano | Pagina del Comune aggiornata al 12 maggio 2026 |
 | Esenzione contro franchigia a Milano | Testo del Comune, citabile |
 
 **La variante 9,49%**, all'inizio riscontrata solo su fonti non primarie, è stata chiusa: è la quota FIS o CIGS a carico del lavoratore, e il 9,19% da solo non copre nessun caso reale. Norma e aliquote nella voce 4.
 
 **Da tenere presente per il futuro del prodotto**: l'art. 13 TUIR è abrogato dal 1° gennaio 2027 dal d.lgs. 117/2026.
-- Ultimo aggiornamento: 6 agosto 2026
 
 **Quello che resta aperto**
 
@@ -41,7 +58,7 @@ Materiale non citabile come fonte, ma prezioso per capire dove il modello va spi
 
 Un utente descrive il suo metodo così: calcola l'IRPEF netta, la sottrae dall'imponibile ottenendo un "nuovo imponibile", e **su quello** calcola le addizionali. È esattamente l'errore contro cui mette in guardia la voce 8: le addizionali si calcolano sul reddito complessivo al netto degli oneri deducibili, non sul reddito già decurtato dell'IRPEF. Il metodo sbagliato produce addizionali più basse di circa il 12%.
 
-Vale la pena citarlo nel README come errore evitato: dimostra di conoscere non solo la regola ma anche la sua versione sbagliata più diffusa.
+È citato nel README fra i punti dove è facile sbagliare, perché la regola da sola non basta: serve conoscere anche la sua versione sbagliata più diffusa.
 
 ### Le addizionali non si vedono il primo anno
 
@@ -104,7 +121,7 @@ Prelievo totale sulla RAL: 6.574,52 euro, pari al 21,9%.
 
 La detrazione da lavoro dipendente include i 65 euro del comma 1.1 e il troncamento del rapporto a quattro decimali imposto dal comma 6: 1.910 + 1.190 × 0,0582 = 1.979,26, più 65.
 
-Trattamento integrativo: non spetta. Le detrazioni complessive (2.979,29) restano ampiamente sotto l'imposta lorda (6.265,89), quindi la condizione di capienza non è soddisfatta.
+Trattamento integrativo: non spetta. Le detrazioni complessive (2.979,26, cioè il comma 1 troncato più l'ulteriore detrazione) restano ampiamente sotto l'imposta lorda (6.265,89), quindi la condizione di capienza non è soddisfatta.
 
 ### Confronto con calcolatori pubblici
 
@@ -137,7 +154,7 @@ Scarti e loro spiegazione:
 
 La catena regge. Il riscontro forte è il calcolatore 1, che espone tutti i passaggi e coincide voce per voce. Il calcolatore 2 diverge dove è meno trasparente, e la divergenza si spiega con l'omissione dell'ulteriore detrazione.
 
-Nota sull'aliquota del 9,19%: entrambi i calcolatori la usano, il che è un riscontro utile ma resta materiale secondario. La riserva della voce 4 rimane aperta.
+Nota sull'aliquota del 9,19%: entrambi i calcolatori la usano, il che è un riscontro utile ma resta materiale secondario. La chiusura su fonte primaria è nella voce 4, dove emerge anche che il 9,19% secco non copre nessun caso reale.
 
 Confronti eseguiti il 6 agosto 2026.
 
@@ -166,7 +183,7 @@ L'imposta è progressiva per scaglioni: ogni aliquota si applica solo alla quota
 
 ---
 
-## 2. Detrazioni da lavoro dipendente - VERIFICATO (con una riserva sul 2026)
+## 2. Detrazioni da lavoro dipendente - VERIFICATO
 
 Schema dell'articolo 13 TUIR, riportato testualmente dalla circolare dell'Agenzia delle Entrate n. 4/E del 16 maggio 2025:
 
@@ -186,9 +203,9 @@ La detrazione è rapportata al periodo di lavoro nell'anno.
 - Fonte primaria: Agenzia delle Entrate, circolare n. 4/E del 16 maggio 2025, schema di calcolo delle detrazioni per lavoro dipendente - https://www.agenziaentrate.gov.it/portale/documents/20143/8410823/Circolare+lavoro+dipendente+LB2025+DD+IRPEF+n.+4+del+16+maggio+2025.pdf/36979eaa-9fc5-a4ec-a7aa-136497c53f91
 - Data di consultazione: 6 agosto 2026
 
-### DA CONFERMARE: applicabilità 2026
+### Il dubbio iniziale: applicabilità al 2026
 
-La circolare 4/E è riferita alla Legge di Bilancio 2025. Fonti secondarie (GEPS, Confindustria Ancona) affermano che la Legge 199/2025 conferma la struttura delle detrazioni per lavoro dipendente e interviene solo sull'aliquota del secondo scaglione. Manca una fonte primaria 2026 che lo dica: da cercare una circolare dell'Agenzia sulla Legge di Bilancio 2026.
+La circolare 4/E è riferita alla Legge di Bilancio 2025. Fonti secondarie (GEPS, Confindustria Ancona) affermavano che la Legge 199/2025 conferma la struttura delle detrazioni per lavoro dipendente e interviene solo sull'aliquota del secondo scaglione, ma nessuna fonte primaria del 2026 lo diceva. Chiuso sotto, sul testo vigente dell'art. 13 invece che su una circolare.
 
 ### RISOLTO sulla fonte primaria: maggiorazione 65 euro, fascia 25.000-35.000
 
@@ -212,7 +229,7 @@ Regola di calcolo che nessuna delle fonti secondarie riportava. Sul nostro caso 
 
 Normattiva, se non gli chiedi una data, mostra il testo vigente dal 1-1-2027, che riporta: **provvedimento abrogato dal d.lgs. 19 giugno 2026, n. 117**.
 
-Non tocca il calcolo 2026, ma è la cosa più interessante emersa da tutta la ricerca dal punto di vista di chi valuta il task: il prototipo ha una scadenza nota. Ogni aliquota va tenuta in un file versionato per anno d'imposta, e va scritto nel README che dal 2027 l'impianto delle detrazioni cambia per effetto di quel decreto. Per un team che vende risparmio fiscale, dimostrare di sapere quando la propria logica smette di valere vale più del calcolo stesso.
+Non tocca il calcolo 2026, ma ha una conseguenza diretta sull'impianto: il prototipo ha una scadenza nota. Per questo ogni aliquota sta in un file versionato per anno d'imposta, e il README dichiara che dal 1° gennaio 2027 l'impianto delle detrazioni cambia per effetto di quel decreto. Sapere quando la propria logica smette di valere è parte del modello, non una nota a margine.
 
 ### Storico del conflitto, ora chiuso
 
@@ -223,11 +240,9 @@ Il conflitto iniziale era tra due fonti secondarie:
 
 **Terzo riscontro indipendente**: l'implementazione open source `stipendio.top` applica la maggiorazione nella fascia oltre 25.000 e fino a 35.000, sommandola alla detrazione teorica prima del rapporto ai giorni lavorati, e usa esattamente le stesse tre formule di fascia che abbiamo estratto dalla circolare 4/E. La sua funzione `calcolaDetrazioniLavoroDipendente` è sovrapponibile alla nostra riga per riga, tranne appunto per questa voce.
 
-Conseguenza: il nostro caso di test a 27.243 euro di reddito **ci ricade dentro**, quindi la detrazione sale da 1.979,29 a 2.044,29 e il netto annuo di 65 euro.
+Conseguenza: il nostro caso di test a 27.243 euro di reddito **ci ricade dentro**, quindi la detrazione sale da 1.979,26 a 2.044,26 e il netto annuo di 65 euro.
 
-**Ma il conflitto non è chiuso del tutto**: anche il calcolatore pubblico con cui avevamo riconciliato all'euro (stipendionettocalcolatore.it) omette la maggiorazione, quindi due implementazioni su tre non la applicano. La norma da leggere è l'art. 13, comma 1, del TUIR nella versione vigente, dove la maggiorazione è stata introdotta da una legge di bilancio precedente e non è toccata dalla circolare 4/E, che commenta solo il primo periodo modificato.
-
-**Da fare prima della consegna**: aprire il testo vigente dell'art. 13 su Normattiva e decidere. Sono 65 euro, ma è esattamente il tipo di dettaglio su cui il Cost Saving Lead ti chiede "e questo perché".
+**Due implementazioni su tre non la applicano**, incluso il calcolatore pubblico con cui avevamo riconciliato all'euro. La spiegazione sta nella provenienza: la maggiorazione è stata introdotta da una legge di bilancio precedente e non è toccata dalla circolare 4/E, che commenta solo il primo periodo modificato. Chi costruisce sulla circolare invece che sul testo vigente non la vede proprio. È il motivo per cui questa voce è stata chiusa su Normattiva e non su un commento.
 
 ## 3. Trattamento integrativo e ulteriori detrazioni - VERIFICATO
 
@@ -265,11 +280,11 @@ Nota: per la spettanza si usa il reddito di riferimento, non il solo imponibile.
 - Riferimenti normativi citati: legge di bilancio 2025 commi 2, 3, 4 e seguenti; d.l. 5 febbraio 2020 n. 3 convertito con legge 2 aprile 2020 n. 21; art. 13 e art. 49 TUIR
 - Data di consultazione: 6 agosto 2026
 
-### DA CONFERMARE: fascia 15.000-28.000 del trattamento integrativo
+### Limite dichiarato: fascia 15.000-28.000 del trattamento integrativo
 
-Il d.l. 3/2020 prevede anche una seconda fascia di trattamento integrativo per redditi tra 15.000 e 28.000 euro, subordinata al fatto che la somma di determinate detrazioni superi l'imposta lorda. La circolare 4/E non la tratta, quindi il testo va verificato a parte.
+Il d.l. 3/2020 prevede anche una seconda fascia di trattamento integrativo per redditi tra 15.000 e 28.000 euro, subordinata al fatto che la somma di determinate detrazioni superi l'imposta lorda. La circolare 4/E non la tratta, e il testo del decreto non è stato riscontrato a parte in questo giro.
 
-Perché conta: con RAL 30.000 il reddito complessivo si colloca intorno ai 27.200 euro, quindi **dentro** quella fascia. Il controllo di capienza va comunque implementato. Stima a priori: detrazione da lavoro dipendente intorno ai 1.970 euro contro un'imposta lorda intorno ai 6.260, quindi la condizione non è soddisfatta e il trattamento non spetta, ma va dimostrato nel codice invece che assunto.
+Perché conta: con RAL 30.000 il reddito complessivo si colloca intorno ai 27.200 euro, quindi **dentro** quella fascia. Il prototipo non aggira il problema assumendo che non spetti: implementa il controllo di capienza e lo lascia decidere al calcolo. Detrazione da lavoro dipendente intorno ai 1.970 euro contro un'imposta lorda intorno ai 6.260, quindi la condizione non è soddisfatta e il trattamento non spetta. Resta che la fascia meriterebbe un riscontro sul testo primario.
 
 ## 4. Contributi previdenziali a carico del dipendente - VERIFICATO
 
@@ -289,7 +304,7 @@ Il massimale annuo si applica ai lavoratori iscritti a forme pensionistiche obbl
 
 - Fonte primaria: INPS, circolare n. 6 del 30 gennaio 2026, paragrafi 5 e 6 - https://www.inps.it/it/it/inps-comunica/atti/circolari-messaggi-e-normativa/dettaglio.circolari-e-messaggi.2026.01.circolare-numero-6-del-30-01-2026_15151.html
 - Data di consultazione: 6 agosto 2026
-- Nota di metodo: la pagina INPS è renderizzata via JavaScript e non restituisce il testo né via fetch né via curl. I valori qui sopra sono estratti dal testo integrale della circolare in formato PDF. Esiste inoltre una rettifica pubblicata dall'INPS su alcuni dati della stessa circolare: **da controllare prima della consegna**.
+- Nota di metodo: la pagina INPS è renderizzata via JavaScript e non restituisce il testo né via fetch né via curl. I valori qui sopra sono estratti dal testo integrale della circolare in formato PDF.
 
 ### Riscontro incrociato su implementazione open source
 
@@ -321,7 +336,7 @@ Verificata la pagina ufficiale della circolare INPS 6/2026 il 6 agosto 2026: **n
 
 Esiste però un caveat vero, scritto nella circolare stessa: l'indice ISTAT del +1,4% usato per aggiornare i valori 2026 è provvisorio ai fini pensionistici e diventerà definitivo solo con il decreto del Ministero dell'Economia atteso a novembre 2026. Ai fini contributivi, cioè quelli che ci servono, i valori si applicano già ora.
 
-### Perché una fonte del 2022 regge, e cosa scrivere nel README
+### Perché una fonte del 2022 regge per un calcolo del 2026
 
 Obiezione legittima: costruire un calcolatore 2026 citando un documento del 2022. La risposta sta nel distinguere due tipi di dato.
 
@@ -422,7 +437,7 @@ La stessa pagina descrive la meccanica temporale che su Reddit veniva raccontata
 - **Saldo**: determinato in sede di conguaglio e trattenuto in un massimo di **11 rate dal mese successivo** alle operazioni di conguaglio
 - In caso di cessazione del rapporto in corso d'anno, trattenuta in un'unica soluzione
 
-Questa è la fonte da citare nel README a supporto della semplificazione per competenza annuale: il nostro calcolatore attribuisce l'addizionale all'anno di maturazione, la busta paga la spalma su acconto e saldo dell'anno dopo.
+È la fonte su cui poggia la semplificazione per competenza annuale: il calcolatore attribuisce l'addizionale all'anno di maturazione, la busta paga la spalma su acconto e saldo dell'anno dopo. Da qui viene anche il selettore "primo anno di lavoro" del prototipo, perché nel primo anno di rapporto le addizionali non compaiono affatto.
 
 ## 7. Mensilità per impiegato a tempo indeterminato - VERIFICATO
 
@@ -436,14 +451,14 @@ Prevede **14 mensilità**: tredicesima e quattordicesima sono erogate ciascuna n
 
 Quindi con RAL 30.000 e 14 mensilità il netto mensile risulta più basso che con 13 o 12, ma il totale in tasca a fine anno è identico. È un punto che va spiegato in pagina, altrimenti l'utente pensa di guadagnare meno.
 
-Scelta consigliata per il prototipo: mostrare il netto su 12 quote come riferimento immediato e permettere di cambiare il divisore, dichiarando l'assunzione. In alternativa fissare 14 e scriverlo.
+Scelta adottata dal prototipo: tre tab per 12, 13 e 14 quote, con il netto annuo che resta fermo mentre cambia solo il mensile. Il divisore diventa così visibile invece di essere un'assunzione nascosta.
 
 - Fonte: Confcommercio, scheda ufficiale del CCNL Terziario Distribuzione e Servizi, testo unico - https://www.confcommercio.it/-/ccnl-terziario-distribuzione-servizi-testo-unico-2019
 - Data di consultazione: 6 agosto 2026
 
-### DA CONFERMARE: riferimento di articolo e contratti alternativi
+### Limiti dichiarati: riferimento di articolo e contratti alternativi
 
-- L'articolo che disciplina la quattordicesima viene indicato come art. 221 da fonti secondarie. La pagina Confcommercio non riporta i numeri di articolo e non pubblica il PDF integrale, quindi il riferimento puntuale non è citabile: da verificare sul testo del contratto se lo si vuole scrivere nel README.
+- L'articolo che disciplina la quattordicesima viene indicato come art. 221 da fonti secondarie. La pagina Confcommercio non riporta i numeri di articolo e non pubblica il PDF integrale, quindi il riferimento puntuale non è citabile e non viene citato: il numero di mensilità poggia sulla scheda ufficiale, non sull'articolo.
 - Altri CCNL prevedono un numero diverso di mensilità, tipicamente 13 nell'industria. Non verificato in questo giro: se il prototipo offre più contratti, ogni valore va sourcato singolarmente.
 
 ## 8. Ordine di applicazione delle voci nella catena lordo to netto - VERIFICATO
@@ -469,6 +484,6 @@ Scelta consigliata per il prototipo: mostrare il netto su 12 quote come riferime
 - Riferimento per l'addizionale comunale: d.lgs. 28 settembre 1998 n. 360
 - Data di consultazione: 6 agosto 2026
 
-### Semplificazione da dichiarare nel README
+### La semplificazione che ne discende
 
-Nella busta paga reale le addizionali dell'anno non si trattengono nello stesso anno: si versano in acconto e saldo l'anno successivo, in rate mensili. Il prototipo le calcola per competenza sull'anno, che è la scelta giusta per una proiezione annuale, ma va scritto, perché è la prima differenza che salta all'occhio a chi confronta con un cedolino vero.
+Nella busta paga reale le addizionali dell'anno non si trattengono nello stesso anno: si versano in acconto e saldo l'anno successivo, in rate mensili. Il prototipo le calcola per competenza sull'anno, che è la scelta giusta per una proiezione annuale, ed è dichiarata nel README perché è la prima differenza che salta all'occhio a chi confronta con un cedolino vero.
